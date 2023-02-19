@@ -1,0 +1,172 @@
+{% extends "ophthclinic/layout.html" %}
+{% load static %}
+{% block body %}
+<style>
+    table{
+        width:800px;
+        margin-bottom: 30px;
+    }
+    .object{
+        width:35%;
+    }
+    tr, th, td{
+        border: solid #dda15e;
+        font-size: 22px;
+        
+    }
+    .first{
+        background-color: #dda15e;
+        color:black;
+        font-weight: 600;
+        font-size: 20px;
+    }
+    .second{
+        background-color: rgb(164, 179, 112);
+        color:black;
+        font-weight: 600;
+        font-size: 20px;
+    }
+.info{
+    font-size: 18px;
+    font-weight: 700;
+}
+span{
+    font-weight: 500;
+}
+
+li{
+    font-size: 20px;
+    font-weight: 600;
+}
+</style>
+<div class="container">
+    <div class="patinfo">
+        <h2>Patient Information</h2>
+        <p class="info">id: <span>{{patient.id}}</span></p>
+        <p class="info">Name: <span>{{patient.name}}</span></p>
+        <p class="info">Age: <span>{{age}}</span></p>
+        <p class="info">Last visit: <span>{{profile.datesubmitted}}</span></p>
+
+    </div>
+    <hr>
+    <div class="medhis">
+        <h2>Medical History</h2>
+        <ol>
+            {% if profile.diabetesmellitus %}
+            <li>Diabetes Mellitus <span>{{profile.deabestesresult}}</span></li>
+            {% endif %}
+            {% if profile.hypertension %}
+            <li>Hypertension</li>
+            {% endif %}
+            {% if profile.cvs %}
+            <li>CVS</li>
+            {% endif %}
+            {% if profile.ihd %}
+            <li>IHD</li>
+            {% endif %}
+            {% if profile.liver %}
+            <li>Liver Disease</li>
+            {% endif %}
+            {% if profile.kidney %} 
+            <li>Kidney Disease</li>
+            {% endif %}
+        </ol>
+    </div>
+    <hr>
+    <div class="ophhis">
+        <h2>Ophthalmic History</h2>
+        <ol>
+            {% if profile.cataract %}
+            <li>Cataract</li>
+            {% endif %}
+            {% if profile.glucoma %} 
+            <li>Glucoma</li>
+            {% endif %}
+            {% if profile.glucomasurgery %} 
+            <li>Glucoma Surgery</li>
+            {% endif %}
+            {% if profile.refractive %} 
+            <li>Refractive</li>
+            {% endif %}
+            <p>Medications: <span>{{profile.medication}}</span></p>
+        </ol>
+            </div>
+    <hr>
+    <div>
+        <h2>Complains</h2>
+        <ol>
+            {% if profile.bov %}
+            <li>BOV</li>
+            {% endif %}
+            {% if profile.diplopia %}
+            <li>Diplopia</li>
+            {% endif %}
+            {% if profile.headache %} 
+            <li>Headache</li>
+            {% endif %}
+            {% if profile.burning %}
+            <li>Burning</li>
+            {% endif %}
+            {% if profile.foreign %}
+            <li>Foreign Body Sensation</li> 
+            {% endif %}
+            {% if profile.epiphoria %} 
+            <li>Epiphoria</li>
+            {% endif %}
+            {% if profile.glare %}
+            <li>Glare</li>
+            {% endif %}
+        
+        </ol>
+        <p>Note <span>{{profile.note}}</span></p>
+        
+    </div>
+    <hr>
+    <div>
+        <h2>Glasses</h2>
+        <table>
+            <tr>
+                <th rowspan="2" >R/</th>
+                <th colspan="3">Right</th>
+                <th colspan="3">Left </th>
+            </tr>
+            <tr>
+              
+                <th>Sphere</th>
+                <th>Cylinder</th>
+                <th>Axis</th>
+                <th>Sphere</th>
+                <th>Cylinder</th>
+                <th>Axis</th>
+            </tr>
+            <tr>
+                <th >Dist</th>
+                <td class="gls">{{profile.leftleft}}</td>
+                <td class="gls">{{profile.leftmiddle}}</td>
+                <td class="gls">{{profile.leftright}}</td>
+                <td class="gls">{{profile.rightleft}}</td>
+                <td class="gls">{{profile.rightmiddle}}</td>
+                <td class="gls">{{profile.rightright}}</td>
+
+            </tr>
+            <tr>
+                <th >Reading</th>
+                <td class="gls">{{profile.leftleftr}}</td>
+                <td class="gls">{{profile.leftmiddler}}</td>
+                <td class="gls">{{profile.leftrightr}}</td>
+                <td class="gls">{{profile.rightleftr}}</td>
+                <td class="gls">{{profile.rightmiddler}}</td>
+                <td class="gls">{{profile.rightrightr}}</td>
+            </tr>
+        </table>
+    </div>
+    <hr>  
+    <a href="{% url 'edit' patient.id %}"><button>Edit patient</button></a>
+    <div>
+        <h2>Other profiles</h2>
+    {% for one in patient.relatedprofiles.all %}
+    <p><a href="{%url 'profile' patient.id one.id %}">{{one.datesubmitted}}</a></p>
+    {% endfor %}
+    </div>
+</div>
+{% endblock %}

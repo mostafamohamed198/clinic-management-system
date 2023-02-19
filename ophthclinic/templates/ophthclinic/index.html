@@ -1,0 +1,192 @@
+{% extends "ophthclinic/layout.html" %}
+{% load static %}
+{% block body %}
+<style>
+    body{
+        font-family: 'Cairo', sans-serif;
+        background-color: #fdfbf4;
+    }
+    label{
+        font-size: 25px;
+        font-weight: 600;
+    }
+    input{
+        margin:10px;
+    }
+    .theh{
+        width:600px;
+        background-color: #dda15e;
+        height: 100px;
+        margin: 0px 30px 0px 0 ;
+        padding-left: 20px;
+        padding-top: 20px;
+        padding-bottom: auto;
+        color: #4c562d;
+        font-size: 30px;
+        font-family: 'Cairo', sans-serif;
+        font-weight: 700;
+        border:solid #FFE7CC;
+    }
+    .thec{
+        background-color: #fefae0;
+        display: none;
+        padding:20px;
+        width: 600px;
+    }
+    #thecp{
+        display: block;
+       
+    }
+    .check{
+        width: 17px;
+        height: 17px;
+    }
+    h2{
+        font-weight: 700;
+        font-size: 40px;
+        margin-top: 20px;
+    }
+</style>
+<!-- 'patientinfo':patientinfo, 'glasses':glasses,'medicalhistory':medicalhistory,'ophthalmichistory':ophthalmichistory, 'complain':complain -->
+<div class="container">
+<form action="" method="post">
+    {% csrf_token %}
+    <div class ='PI theh'>Patient Information</div>
+    <div class="PI thec" id="thecp">
+    <label for="name">Name:</label>
+    <input type="text" name="name"><br>
+    <label for="yearofbirth">Year of birth:</label>
+    <input type='number' name="yearofbirth">
+    </div>
+
+    <div class="PG theh">Glasses</div>
+    <div class="PG thec">
+    <!-- <div class="PGD theh">Distance</div>
+    <div class="PGD thec"> -->
+        <h2>Distance:</h2>
+        <label for="leftleft"> Left sphere:</label>
+    <input type="float" name="leftleft" value=0><br>
+        <label for="leftmiddle">Left Cylinder:</label>
+    <input type="float" name="leftmiddle" value=0><br>
+    <label for="leftright">Left Axis:</label>
+    <input type="float" name="leftright" value=0><br>
+    <label for="rightleft">Right Sphere:</label>
+    <input type="float" name="rightleft" value=0><br>
+    <label for="rightmiddle">Right Cylinder:</label>
+    <input type="float" name="rightmiddle" value=0><br>
+    <label for="rightright">Right Axis:</label>
+    <input type="float" name="rightright" value=0><br>
+    <!-- </div>     -->
+
+    <!-- <div class="PGR theh">Reading</div>
+    <div class="PGR thec"> -->
+        <h2>Reading:</h2>
+        <label for="leftleftr">Left Sphere:</label>
+    <input type="float" name="leftleftr" value=0><br>
+    <label for="leftmiddler">Left Cylinder:</label>
+    <input type="float" name="leftmiddler" value=0><br>
+    <label for="leftrightr">Left Axis:</label>
+    <input type="float" name="leftrightr" value=0><br>
+    <label for="rightleftr">Right Sphere:</label>
+    <input type="float" name="rightleftr" value=0><br>
+    <label for="rightmiddler">Right Cylinder:</label>
+    <input type="float" name="rightmiddler" value=0><br>
+    <label for="rightrightr">Right Axis: </label>
+    <input type="float" name="rightrightr" value=0><br>
+    <label for="idpdist">IDP distance: </label>
+    <input type="float" name="idpdist" value=0><br>
+    <label for="idpread">IDP reading: </label>
+    <input type="float" name="idpread" value=0><br>
+    
+
+    <!-- </div> -->
+    </div>
+    
+    <div class="PM theh">Medical History</div>
+    <div class="PM thec">
+        <label for="diabetesmellitus">Diabetes Mellitus(DM):</label>
+    <input type="checkbox" class='check'name="diabetesmellitus"><br>
+    <label for="deabetesnumber">Diabetes result:</label>
+    <input type="float" name="deabetesnumber" value=0><br>
+    <label for="hypertension">Hypertension(HTN):</label>
+    <input type="checkbox" class='check' name="hypertension"><br>
+    <label for="ihd">Ischemic Heart Disease(IHD):</label>
+    <input type="checkbox" class='check'name="ihd"><br>
+    <label for="cvs">Cardio Vascular system (CVS):</label>
+    <input type="checkbox" class='check' name="cvs"><br>
+    <label for="asthma">Asthma:</label>
+    <input type="checkbox" class='check' name="asthma"><br>
+    <label for="atopy">Atopy:</label>
+    <input type="checkbox" class='check'name="atopy"><br>
+    <label for="liver">Liver Disease:</label>
+    <input type="checkbox" class='check'name="liver"><br>
+    <label for="kidney">Kidney Disease</label>
+    <input type="checkbox" class='check' name="kidney"><br>
+    </div>
+
+    <div class="PO theh">Ophthalmic History</div>
+    <div class="PO thec">
+        <label for="cataract">Cataract:</label>
+    <input type="checkbox" class='check' name="cataract"><br>
+    <label for="glucoma">Glucoma:</label>
+    <input type="checkbox" class='check'name="glucoma"><br>
+    <label for="glucomasurery">Glucoma surgery:</label>
+    <input type="checkbox" class='check'name="glucomasurgery"><br>
+    <label for="refractive">Refractive:</label>
+    <input type="checkbox" class='check'name="refractive"><br>
+    <label for="medication">Medications</label>
+    <textarea type="text" name="medication"></textarea><br>
+
+    </div>
+
+    <div class="PC theh">Complains</div>
+    <div class="PC thec">
+        <label for="bov">BOV:</label>
+    <input type="checkbox" class='check' name="bov"><br>
+    <label for="diplopia">Diplopia:</label>
+    <input type="checkbox" class='check' name="diplopia"><br>
+    <label for="headache">Headache:</label>
+    <input type="checkbox" class='check' name="headache"><br>
+    <label for="burning">Burning:</label>
+    <input type="checkbox"  class='check' name="burning"><br>
+    <label for="foreign">Foreign body sensation:</label>
+    <input type="checkbox" class='check' name="foreign"><br>
+    <label for="epiphoria">Epiphoria:</label>
+    <input type="checkbox" class='check' name="epiphoria"><br>
+    <label for="glare">Glare:</label>
+    <input type="checkbox"  id ='glare'class='check' name="glare"><br>
+    <label for="note">Note:</label>
+    <textarea type="checkbox" name="note"></textarea>
+    </div>
+    <input type="submit">
+
+
+</form>
+</div>
+<script>
+    
+    document.querySelectorAll('.theh').forEach(div => {
+        div.addEventListener('click',function(){
+            console.log('clicked')
+             document.querySelectorAll('.thec').forEach(container =>{
+                console.log(container.classList[0])
+                if (container.classList[0] == div.classList[0]){
+                    console.log('equal')
+                     container.style.display = 'block';
+
+                 }
+                 else{
+                    container.style.display = 'none';
+                 }
+             })
+        })
+    })
+</script>
+{% endblock %}
+
+<!-- name = models.CharField(max_length=50, blank=True, null=True)
+
+
+epiphoria = models.BooleanField(default=False)
+glare = models.BooleanField(default=False)
+note = models.CharField(blank=True, null=True,max_length=1000) -->

@@ -1,0 +1,15 @@
+{% extends "ophthclinic/layout.html" %}
+{% load static %}
+{% block body %}
+<div class="container">
+<h1>Search Results</h1>
+
+<ul>
+  {% for patient in object_list %}
+    <a href="{%url 'patientinfo' patient.id%}"><li>
+      {{ patient.name }}, {{ patient.yearofbirth }},{{patient.datesubmitted}}
+    </li></a>
+  {% endfor %}
+</ul>
+</div>
+{% endblock %}
